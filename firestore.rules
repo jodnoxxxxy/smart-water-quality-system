@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isValidId(userId);
+      allow delete: if isSignedIn();
+    }
+
+    // Water records collection (Real water sample tests)
+    match /water_records/{recordId} {
+      allow read: if true;
+      allow create, update: if isValidId(recordId);
+      allow delete: if isSignedIn();
+    }
+
+    // Local alerts collection (Community alerts)
+    match /local_alerts/{alertId} {
+      allow read: if true;
+      allow create, update: if isValidId(alertId);
+      allow delete: if isSignedIn();
+    }
+  }
+}

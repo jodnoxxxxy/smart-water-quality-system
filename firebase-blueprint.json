@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Registered local residents, homeowners, and technicians",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "username": { "type": "string", "maxLength": 50 },
+        "role": { "type": "string", "enum": ["resident", "homeowner", "business", "analyst", "technician", "auditor", "manager"] },
+        "roleTitle": { "type": "string", "maxLength": 60 },
+        "facility": { "type": "string", "maxLength": 120 },
+        "defaultRegion": { "type": "string", "enum": ["urban", "groundwater", "coastal", "industrial"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "username", "role", "createdAt"]
+    },
+    "WaterRecord": {
+      "title": "WaterRecord",
+      "description": "Real water sample tests recorded by users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "dateTime": { "type": "string" },
+        "ph": { "type": "number" },
+        "tds": { "type": "number" },
+        "region": { "type": "string", "enum": ["urban", "groundwater", "coastal", "industrial"] },
+        "ca": { "type": "number" },
+        "mg": { "type": "number" },
+        "k": { "type": "number" },
+        "na": { "type": "number" },
+        "so4": { "type": "number" },
+        "cl": { "type": "number" },
+        "result": { "type": "string" },
+        "notes": { "type": "string", "maxLength": 300 }
+      },
+      "required": ["id", "dateTime", "ph", "tds", "region", "result"]
+    },
+    "LocalAlert": {
+      "title": "LocalAlert",
+      "description": "Area quality alerts and reminders for local citizens",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 120 },
+        "message": { "type": "string", "maxLength": 500 },
+        "time": { "type": "string" },
+        "type": { "type": "string", "enum": ["info", "warning", "alert", "success"] },
+        "read": { "type": "boolean" },
+        "area": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "type", "read"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile records"
+    },
+    "/water_records/{recordId}": {
+      "schema": "WaterRecord",
+      "description": "Real water quality test records"
+    },
+    "/local_alerts/{alertId}": {
+      "schema": "LocalAlert",
+      "description": "Community and local water alerts"
+    }
+  }
+}
