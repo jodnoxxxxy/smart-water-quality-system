@@ -10,3 +10,4 @@ A Flask-based web application that analyzes water quality based on pH and TDS va
 - CSV-based Local Storage
 
 Developed by Aman, Aditya, and Sameer.
+# smart-water-quality-system
