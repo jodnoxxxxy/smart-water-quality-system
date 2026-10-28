@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Analysis Result: {{ result }}</h2>
+<p>{{ message }}</p>
+<div class="box">
+  <h3>Estimated Composition ({{ data.region | capitalize }})</h3>
+  <ul style="list-style:none;padding:0;">
+    <li>pH: {{ data.ph }}</li>
+    <li>TDS: {{ data.tds }} ppm</li>
+    <li>Calcium: {{ data.ca }} mg/L</li>
+    <li>Magnesium: {{ data.mg }} mg/L</li>
+    <li>Potassium: {{ data.k }} mg/L</li>
+    <li>Sodium: {{ data.na }} mg/L</li>
+    <li>Sulphate: {{ data.so4 }} mg/L</li>
+    <li>Chloride: {{ data.cl }} mg/L</li>
+  </ul>
+  <p style="font-size:12px;color:#555;margin-top:20px;margin-bottom:20px;">
+    *Estimates based on regional water chemistry; actual values may vary.*
+  </p>
+  <a class="btn" href="{{ url_for('analyze') }}">Analyze Again</a>
+</div>
+{% endblock %}

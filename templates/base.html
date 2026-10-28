@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title if title else "Smart Water Quality System" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <div>
+      <b>💧 Smart Water System</b>
+    </div>
+
+    <div>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('analyze') }}">Analyze</a>
+      <a href="{{ url_for('history') }}">History</a>
+
+      {% if session.get('user') %}
+        <a href="{{ url_for('logout') }}">Logout ({{ session['user'] }})</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer>
+     Smart Water Quality 
+  </footer>
+</body>
+</html>

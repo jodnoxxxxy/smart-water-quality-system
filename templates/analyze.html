@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Water Analysis</h2>
+<form method="POST" class="form-box" style="max-width:500px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <label>pH:</label>
+    <input type="number" step="0.1" name="ph" required style="width:100px;">
+    <label>TDS (ppm):</label>
+    <input type="number" name="tds" required style="width:120px;">
+  </div><br>
+  
+  <label>Region / Source Type:</label>
+  <select name="region" required>
+    <option value="groundwater">Groundwater</option>
+    <option value="urban">Urban Tap Water</option>
+    <option value="industrial">Industrial Region</option>
+    <option value="coastal">Coastal Area</option>
+  </select>
+  <br><br>
+  <button class="btn">Analyze</button>
+</form>
+{% endblock %}

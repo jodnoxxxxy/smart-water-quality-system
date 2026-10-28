@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local credentials and analysis records
+data/users.csv
+data/*_records.csv
+data/records.csv

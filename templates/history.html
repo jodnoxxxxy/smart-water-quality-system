@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Water Test History</h2>
+<table id="dataTable">
+  <tr>
+    <th>Date</th><th>pH</th><th>TDS</th><th>Ca</th><th>Mg</th>
+    <th>K</th><th>Na</th><th>SO₄</th><th>Cl</th><th>Result</th>
+  </tr>
+  {% for row in records %}
+  <tr>{% for c in row %}<td>{{ c }}</td>{% endfor %}</tr>
+  {% endfor %}
+</table>
+<div id="chartContainer">
+  <canvas id="trendChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='chart.js') }}"></script>
+{% endblock %}
